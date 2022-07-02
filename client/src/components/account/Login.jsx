@@ -66,7 +66,11 @@ const Login = () => {
   };
 
   const signupUser = async () => {
-    await signupUserApi(signupValues);
+    const response = await signupUserApi(signupValues);
+    if (response.status === 200) {
+      setSignupValues(initialSignupValues);
+      setToogleAccount("login");
+    } 
   };
 
   return (
@@ -110,6 +114,7 @@ const Login = () => {
                 name="password"
                 onChange={(e) => onInputChange(e)}
               />
+
               <LoginButton variant="contained" onClick={() => signupUser()}>
                 Create account
               </LoginButton>
