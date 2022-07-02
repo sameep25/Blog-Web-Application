@@ -5,7 +5,7 @@ import Login from './components/account/Login';
 function App() {
   return (
     <div className="App">
-      Index
+      <Login />
     </div>
   );
 }
