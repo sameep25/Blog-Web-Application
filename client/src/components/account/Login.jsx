@@ -1,12 +1,13 @@
 import { React, useState } from "react";
 
 // api
-import { signupUserApi } from "../../service/api";
+import { signupUserApi ,loginUserApi } from "../../service/api" ;
 
 // mui
 import { Box, TextField, Button, Grid, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
+// MUI STYLED COMPONENTS__________________
 const CustomBox = styled(Box)`
   margin: auto;
   width: 400px;
@@ -47,9 +48,16 @@ const Image = styled("img")({
   display: "flex",
   padding: "50px 0 0 ",
 });
+// __________________________________________________
 
+// initial values for signupValues state (object)
 const initialSignupValues = {
   name: "",
+  username: "",
+  password: "",
+};
+// initial values for loginValues state (object)
+const initialLoginValues = {
   username: "",
   password: "",
 };
@@ -60,17 +68,36 @@ const Login = () => {
 
   const [toogleAccount, setToogleAccount] = useState("login");
   const [signupValues, setSignupValues] = useState(initialSignupValues);
+  const [loginValues, setLoginValues] = useState(initialLoginValues);
 
-  const onInputChange = (e) => {
+  // saving changes from signup form
+  const onInputChangeSignup = (e) => {
     setSignupValues({ ...signupValues, [e.target.name]: e.target.value });
   };
 
+  // saving changes from login form
+  const onInputChangeLogin = (e) => {
+    setLoginValues({ ...loginValues, [e.target.name]: e.target.value });
+  };
+
+  // api for signup new user
   const signupUser = async () => {
     const response = await signupUserApi(signupValues);
     if (response.status === 200) {
       setSignupValues(initialSignupValues);
       setToogleAccount("login");
-    } 
+    }
+  };
+
+  // api for login existing user
+  const loginUser = async () => {
+    const response = await loginUserApi(loginValues);
+    // console.log(response);
+    if (response.status === 200) {
+      // console.log("check");
+      sessionStorage.setItem('accessToken' ,`Bearer ${response.data.accessToken}`);
+      sessionStorage.setItem('refreshToken' ,`Bearer ${response.data.refreshToken}`) ;
+    }
   };
 
   return (
@@ -79,12 +106,24 @@ const Login = () => {
         <CustomBox>
           <Image src={imageURL} alt="Login" />
 
-          {toogleAccount === `login` ? (
+          {toogleAccount === `login` ? ( // conditional rendering
             //login
             <WrapperBox>
-              <TextField label="User-Name" variant="standard" />
-              <TextField label="Password" variant="standard" />
-              <LoginButton variant="contained">Login</LoginButton>
+              <TextField
+                label="User-Name"
+                variant="standard"
+                name="username"
+                onChange={(e) => onInputChangeLogin(e)}
+              />
+              <TextField
+                label="Password"
+                variant="standard"
+                name="password"
+                onChange={(e) => onInputChangeLogin(e)}
+              />
+              <LoginButton variant="contained" onClick={() => loginUser()}>
+                Login
+              </LoginButton>
               <Text>OR</Text>
               <SignupButton
                 variant="text"
@@ -100,19 +139,19 @@ const Login = () => {
                 label="Enter Name"
                 variant="standard"
                 name="name"
-                onChange={(e) => onInputChange(e)}
+                onChange={(e) => onInputChangeSignup(e)}
               />
               <TextField
                 label="Enter User-Name"
                 variant="standard"
                 name="username"
-                onChange={(e) => onInputChange(e)}
+                onChange={(e) => onInputChangeSignup(e)}
               />
               <TextField
                 label="Enter Password"
                 variant="standard"
                 name="password"
-                onChange={(e) => onInputChange(e)}
+                onChange={(e) => onInputChangeSignup(e)}
               />
 
               <LoginButton variant="contained" onClick={() => signupUser()}>
