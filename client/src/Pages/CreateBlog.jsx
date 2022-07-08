@@ -1,8 +1,8 @@
 import { React, useState, useEffect, useContext } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { DataContext } from "../context/DataProvider";
 
-import { uploadImageApi } from "../service/api";
+import { uploadImageApi, savePostApi } from "../service/api";
 
 import {
   Box,
@@ -60,6 +60,7 @@ const CreateBlog = () => {
   const { account } = useContext(DataContext);
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   const url = post.picture
     ? post.picture
@@ -87,6 +88,13 @@ const CreateBlog = () => {
     post.categories = location.search?.split("=")[1] || "All";
     post.username = account.username;
   }, [imageFile]);
+
+  const savePost = async () => {
+    const response = await savePostApi(post);
+    if (response.status === 200) {
+      navigate("/");
+    }
+  };
 
   return (
     <>
@@ -116,7 +124,10 @@ const CreateBlog = () => {
               name="title"
               onChange={(e) => onValueChange(e)}
             />
-            <Button variant="contained">Publish</Button>
+
+            <Button variant="contained" onClick={() => savePost()}>
+              Publish
+            </Button>
           </StyledFormControl>
 
           {/* description  */}

@@ -23,9 +23,18 @@ export const loginUserApi = async (userData) => {
 // upload image api
 export const uploadImageApi = async (imageData) => {
   try {
-    console.log(imageData.name);
+    // console.log(imageData.name);
     return await axios.post(`${URL}/file/upload`, imageData);
   } catch (error) {
     console.log("Error while calling uploadImageApi ", error);
+  }
+};
+
+// savePost api
+export const savePostApi = async (postData) => {
+  try {
+    return await axios.post(`${URL}/create`, postData);
+  } catch (error) {
+    console.log("Error while calling savePostApi", error);
   }
 };
