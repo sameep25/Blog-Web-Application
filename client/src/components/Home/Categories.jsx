@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 // MUI
 import {
   Button,
@@ -17,7 +17,6 @@ import { categories } from "../../constants/data";
 const SytledTable = styled(Table)`
   border: 1px solid rgba(224, 224, 224, 1);
 `;
-
 const StyledButton = styled(Button)`
   display: flex;
   margin: auto;
@@ -29,24 +28,39 @@ const StyledButton = styled(Button)`
 `;
 
 const Categories = () => {
+
+  const [searchParams] = useSearchParams() ;
+  const category = searchParams.get('category') ;
+
   return (
     <>
-      <Link to={"create-blog"} style={{textDecoration : "none"}}>
+      <Link
+        to={`/create-blog?category=${category}`}
+        style={{ textDecoration: "none" }}
+      >
         <StyledButton variant="contained">Create Blog</StyledButton>
       </Link>
+
       <SytledTable>
+
         <TableHead>
           <TableRow>
-            <TableCell align="center">All Categories</TableCell>
+            <TableCell align="center">
+              <Link style={{textDecoration:"none",color: "#000" }} to="/">All Categories</Link>
+            </TableCell>
           </TableRow>
         </TableHead>
+
         <TableBody>
           {categories.map((category) => (
             <TableRow key={category.id}>
-              <TableCell align="center">{category.type}</TableCell>
+              <TableCell align="center">
+                <Link style={{textDecoration:"none" ,color: "#000" }} to={`/?category=${category.type}`} >{category.type}</Link>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
+
       </SytledTable>
     </>
   );

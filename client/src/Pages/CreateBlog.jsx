@@ -1,4 +1,8 @@
-import { React, useState  ,useEffect} from "react";
+import { React, useState, useEffect, useContext } from "react";
+import { useLocation } from "react-router-dom";
+import { DataContext } from "../context/DataProvider";
+
+import { uploadImageApi } from "../service/api";
 
 import {
   Box,
@@ -50,13 +54,39 @@ const initialPost = {
 };
 
 const CreateBlog = () => {
-  const url = `https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80`;
-
   const [post, setPost] = useState(initialPost);
+  const [imageFile, setImageFile] = useState("");
 
+  const { account } = useContext(DataContext);
+
+  const location = useLocation();
+
+  const url = post.picture
+    ? post.picture
+    : `https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80`;
+
+  // handle value change
   const onValueChange = (e) => {
     setPost({ ...post, [e.target.name]: e.target.value });
   };
+
+  // saving image in db
+  useEffect(() => {
+    const getImage = async () => {
+      if (imageFile) {
+        const data = new FormData();
+        data.append("name", imageFile.name);
+        data.append("file", imageFile);
+
+        // API call to save image in db
+        const response = await uploadImageApi(data);
+        post.picture = response.data;
+      }
+    };
+    getImage();
+    post.categories = location.search?.split("=")[1] || "All";
+    post.username = account.username;
+  }, [imageFile]);
 
   return (
     <>
@@ -74,7 +104,12 @@ const CreateBlog = () => {
             <label htmlFor="fileInput">
               <AddCircleIcon fontSize="large" color="action" />
             </label>
-            <input type="file" id="fileInput" style={{ display: "none" }} />
+            <input
+              type="file"
+              id="fileInput"
+              style={{ display: "none" }}
+              onChange={(e) => setImageFile(e.target.files[0])}
+            />
 
             <StyledInputBase
               placeholder="Title"
@@ -91,7 +126,6 @@ const CreateBlog = () => {
             name="description"
             onChange={(e) => onValueChange(e)}
           />
-
         </Grid>
       </Grid>
     </>
