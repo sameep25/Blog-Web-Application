@@ -12,6 +12,7 @@ import DataProvider from "./context/DataProvider";
 // PAGES
 import Home from "./Pages/Home";
 import CreateBlog from "./Pages/CreateBlog";
+import DetailView from "./Pages/DetailView";
 // COMPONENTS
 import Login from "./Pages/Login";
 import Header from "./components/Home/Header";

@@ -38,3 +38,15 @@ export const savePostApi = async (postData) => {
     console.log("Error while calling savePostApi", error);
   }
 };
+
+// getPost api
+export const getAllPosts = async (categories) => {
+  try {
+    console.log(categories);
+    let category = categories.category ;
+    console.log(category);
+    return await axios.get(`${URL}/posts`,{ params: { category } });
+  } catch (error) {
+    console.log("Error while calling getAllPost Api", error);
+  }
+};
