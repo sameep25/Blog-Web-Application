@@ -1,11 +1,10 @@
 import { React, useState, useEffect, useContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { DataContext } from "../context/DataProvider";
+import { useLocation, useNavigate ,useParams} from "react-router-dom";
+import { DataContext } from "../../context/DataProvider";
 
-import { uploadImageApi, savePostApi } from "../service/api";
+import { uploadImageApi, updatePostApi, getPostById } from "../../service/api";
 
 import {
-  Box,
   Button,
   FormControl,
   Grid,
@@ -49,11 +48,12 @@ const initialPost = {
   description: "",
   picture: "",
   username: "",
+  name:"",
   categories: "",
   createdDate: new Date(),
 };
 
-const CreateBlog = () => {
+const UpdateBlog = () => {
   const [post, setPost] = useState(initialPost);
   const [imageFile, setImageFile] = useState("");
 
@@ -61,6 +61,7 @@ const CreateBlog = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
+  const {id} = useParams() ;
 
   const url = post.picture
     ? post.picture
@@ -70,6 +71,17 @@ const CreateBlog = () => {
   const onValueChange = (e) => {
     setPost({ ...post, [e.target.name]: e.target.value });
   };
+
+//   fetching initial post-data
+  useEffect(() =>{
+    const fetchData = async() =>{
+        const response = await getPostById(id);
+        if (response.status === 200) {
+          setPost(response.data);
+        }
+    }
+    fetchData() ;
+  },[])
 
   // saving image in db
   useEffect(() => {
@@ -85,14 +97,15 @@ const CreateBlog = () => {
       }
     };
     getImage();
-    post.categories = location.search?.split("=")[1] || "All";
+    post.categories = location.search?.split('=')[1] || 'All';
     post.username = account.username;
+    post.name = account.name ;
   }, [imageFile]);
 
-  const savePost = async () => {
-    const response = await savePostApi(post);
+  const updateBlogPost = async () => {
+    const response = await updatePostApi(post);
     if (response.status === 200) {
-      navigate("/");
+      navigate(`/details/${id}`);
     }
   };
 
@@ -123,10 +136,11 @@ const CreateBlog = () => {
               placeholder="Title"
               name="title"
               onChange={(e) => onValueChange(e)}
+              value={post.title}
             />
 
-            <Button variant="contained" onClick={() => savePost()}>
-              Publish
+            <Button variant="contained" onClick={() => updateBlogPost()}>
+              Update
             </Button>
           </StyledFormControl>
 
@@ -136,6 +150,7 @@ const CreateBlog = () => {
             placeholder="Tell your story..."
             name="description"
             onChange={(e) => onValueChange(e)}
+            value={post.description}
           />
         </Grid>
       </Grid>
@@ -143,4 +158,4 @@ const CreateBlog = () => {
   );
 };
 
-export default CreateBlog;
+export default UpdateBlog;

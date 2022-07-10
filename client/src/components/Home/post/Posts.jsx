@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 
 import { getAllPosts } from "../../../service/api";
 import Post from "./Post";
@@ -28,7 +28,9 @@ const Posts = () => {
       {posts && posts.length > 0 ? (
         posts.map((post) => (
           <Grid item lg={3} sm={4} xs={12} key={post._id}>
-            <Post  post={post} />
+            <Link to={`/details/${post._id}`}   style={{textDecoration:"none" ,color:"inherit"}}>
+              <Post post={post} />
+            </Link>
           </Grid>
         ))
       ) : (

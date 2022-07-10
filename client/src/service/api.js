@@ -39,14 +39,38 @@ export const savePostApi = async (postData) => {
   }
 };
 
-// getPost api
+// update post
+export const updatePostApi = async (postData) => {
+  try {
+    return await axios.put(`${URL}/update/${postData._id}`, postData );
+  } catch (error) {
+    console.log("Error while calling savePostApi", error);
+  }
+};
+
+// delet post
+export const deletePostApi = async(id) =>{
+  try{
+    return await axios.delete(`${URL}/delete/${id}`) ;
+  }catch(error){
+    console.log("Error while calling deletePostApi" ,error);
+  }
+}
+// getPosts api
 export const getAllPosts = async (categories) => {
   try {
-    console.log(categories);
-    let category = categories.category ;
-    console.log(category);
-    return await axios.get(`${URL}/posts`,{ params: { category } });
+    let category = categories.category;
+    return await axios.get(`${URL}/posts`, { params: { category } });
   } catch (error) {
     console.log("Error while calling getAllPost Api", error);
+  }
+};
+
+// get singlePost api
+export const getPostById = async (id) => {
+  try {
+    return await axios.get(`${URL}/post`, {params : {id} } );
+  } catch (error) {
+    console.log("Error while calling getPostById Api", error);
   }
 };

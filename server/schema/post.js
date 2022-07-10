@@ -18,6 +18,10 @@ const postSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  name: {
+    type: String,
+    required: true,
+  },
   categories: {
     type: String,
     required: true,
