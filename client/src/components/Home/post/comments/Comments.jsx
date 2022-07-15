@@ -20,15 +20,14 @@ const Container = styled(Box)`
 const StyledTextArea = styled(TextareaAutosize)`
   height: 100px;
   width: 100%;
-  margin: 0 20px;
+  margin: 5px 20px;
   &:focus-visible {
     outline: none;
   }
   border: none;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid #f1f1f1;
   padding: 5px;
 `;
-
 // inital comment object
 const initialComment = {
   name: "",
@@ -43,6 +42,7 @@ const Comments = ({ post }) => {
   const { account } = useContext(DataContext);
   const [comment, setComment] = useState(initialComment);
   const [comments, setComments] = useState([]);
+  const [toogle, setToogle] = useState(false);
   const { id } = useParams();
 
   // fetching comments db
@@ -54,7 +54,7 @@ const Comments = ({ post }) => {
       }
     };
     getComments();
-  }, []);
+  }, [post, toogle]);
 
   // handling comment text change and setComment value
   const handleChange = (e) => {
@@ -73,6 +73,7 @@ const Comments = ({ post }) => {
     if (response.status === 200) {
       setComment(initialComment);
     }
+    setToogle((prevState) => !prevState);
   };
 
   return (
@@ -93,7 +94,17 @@ const Comments = ({ post }) => {
         </Button>
       </Container>
 
-      <Box></Box>
+      <Box>
+        {comments &&
+          comments.length > 0 &&
+          comments.map((comment) => (
+            <Comment
+              comment={comment}
+              setToogle={setToogle}
+              key={comment._id}
+            />
+          ))}
+      </Box>
     </Box>
   );
 };

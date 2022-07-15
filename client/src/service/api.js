@@ -48,14 +48,7 @@ export const updatePostApi = async (postData) => {
   }
 };
 
-// delet post
-export const deletePostApi = async (id) => {
-  try {
-    return await axios.delete(`${URL}/delete/${id}`);
-  } catch (error) {
-    console.log("Error while calling deletePostApi", error);
-  }
-};
+
 // getPosts api
 export const getAllPosts = async (categories) => {
   try {
@@ -90,5 +83,22 @@ export const getCommentsApi = async (id) => {
     return await axios.get(`${URL}/comments/${id}`);
   } catch (error) {
     console.log("Error while calling getCommentsApi", error);
+  }
+};
+
+export const deleteCommentApi = async (id) => {
+  try {
+    return await axios.delete(`${URL}/comment/delete/${id}`);
+  } catch (error) {
+    console.log("Error while calling deletePostApi", error);
+  }
+};
+
+// delet post
+export const deletePostApi = async (id) => {
+  try {
+    return await axios.delete(`${URL}/delete/${id}`);
+  } catch (error) {
+    console.log("Error while calling deletePostApi", error);
   }
 };

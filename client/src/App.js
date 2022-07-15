@@ -17,6 +17,8 @@ import UpdateBlog from "./Pages/post/UpdateBlog";
 // COMPONENTS
 import Login from "./Pages/Login";
 import Header from "./components/Home/Header";
+import About from "./Pages/About";
+import Contact from "./Pages/Contact";
 
 // private routes to prevent direct routing
 const PrivateRoute = ({isUserAuthenticated, ...props}) => {
@@ -59,6 +61,14 @@ function App() {
 
             <Route path="/update/:id" element={<PrivateRoute isUserAuthenticated={isUserAuthenticated} />} >
               <Route path="/update/:id" element={<UpdateBlog />} />
+            </Route>
+
+            <Route path="/about" element={<PrivateRoute isUserAuthenticated={isUserAuthenticated} />} >
+              <Route path="/about" element={<About />} />
+            </Route>
+
+            <Route path="/contact" element={<PrivateRoute isUserAuthenticated={isUserAuthenticated} />} >
+              <Route path="/contact" element={<Contact />} />
             </Route>
 
 
