@@ -4,7 +4,8 @@ import { useSearchParams, Link } from "react-router-dom";
 import { getAllPosts } from "../../../service/api";
 import Post from "./Post";
 
-import { Box, Grid } from "@mui/material";
+import { Box, Grid ,styled} from "@mui/material";
+
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
@@ -25,17 +26,21 @@ const Posts = () => {
 
   return (
     <>
+    <Grid container>
       {posts && posts.length > 0 ? (
         posts.map((post) => (
-          <Grid item lg={3} sm={4} xs={12} key={post._id}>
-            <Link to={`/details/${post._id}`}   style={{textDecoration:"none" ,color:"inherit"}}>
+          <Grid item lg={3} sm={6} md={4} xs={12} key={post._id} >
+            <Link to={`/details/${post._id}`} style={{textDecoration:"none" ,color:"inherit"}}>
               <Post post={post} />
             </Link>
           </Grid>
         ))
-      ) : (
+      )
+      
+       : (
         <Box>No Data available to display</Box>
       )}
+      </Grid>
     </>
   );
 };

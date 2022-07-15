@@ -3,6 +3,7 @@ import express from "express";
 import { signupUser ,loginUser } from "../controller/user-controller.js";
 import { uploadImage ,getImage } from "../controller/image-controller.js";
 import { createPost ,getAllPosts ,getPostById ,updatePostById ,deletePostById} from "../controller/post-controller.js";
+import { addNewComment ,getCommentsById } from "../controller/comment-controller.js";
 
 import upload from "../utils/upload.js"
 
@@ -20,5 +21,8 @@ router.get("/posts" ,getAllPosts) ;
 router.get("/post" ,getPostById) ;
 router.put("/update/:id",updatePostById) ;
 router.delete("/delete/:id" ,deletePostById) ;
+
+router.post("/comment/new" ,addNewComment) ;
+router.get("/comments/:id" ,getCommentsById) ;
 
 export default router;

@@ -12,14 +12,12 @@ const ImagedBox = styled(Box)`
   justify-content: center;
   flex-direction : column ;
 `;
-
 const Heading = styled(Typography)`
     font-size : 4rem ;
     color : #ffffff ;
     line-height : 1 ;
     backdrop-filter: blur(2px);
 `
-
 const SubHeading = styled(Typography)`
     font-size :2rem ;
     color : #ffffff ;

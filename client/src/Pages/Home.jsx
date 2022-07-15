@@ -13,6 +13,7 @@ const Home = () => {
       <Banner />
 
       <Grid container spacing={2}>
+        
         <Grid item lg={2} sm={3} xs={12}>
           <Categories />
         </Grid>

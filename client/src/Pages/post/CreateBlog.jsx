@@ -85,7 +85,7 @@ const CreateBlog = () => {
       }
     };
     getImage();
-    post.categories = location.search?.split("=")[1] || "All";
+    post.categories = location.search?.split("=")[1] || "";
     post.username = account.username;
     post.name = account.name ;
   }, [imageFile]);

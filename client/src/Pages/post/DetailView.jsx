@@ -7,7 +7,9 @@ import { styled } from "@mui/material/styles";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import { getPostById ,deletePostApi } from "../../service/api";
+import { getPostById, deletePostApi } from "../../service/api";
+
+import Comments from "../../components/Home/post/comments/Comments";
 
 // styled components
 const Image = styled("img")({
@@ -17,7 +19,7 @@ const Image = styled("img")({
 });
 const Heading = styled(Typography)`
   font-size: 38px;
-  font-weight: 600;
+  font-weight: 400;
   text-align: center;
   word-break: break-word;
 `;
@@ -74,37 +76,43 @@ const DetailView = () => {
     <Grid container justifyContent="center">
       <Grid
         item
-        lg={10}
+        lg={11}
         sm={12}
         xs={12}
         style={{ marginRight: "10px", marginLeft: "10px" }}
       >
         <Image src={url} alt="blog" />
-        <Box style={{ float: "right" }}>
-          {account.username === post.username && (
-            <>
-              <Link to={`/update/${post._id}`}>
-                <Edit color="primary" />
-              </Link>
-              <Delete color="error" onClick={() => deleteBlog()} />
-            </>
-          )}
-        </Box>
+        <Box style={{ padding: "10px", }}>
+          <Box style={{ float: "right" }}>
+            {account.username === post.username && (
+              <>
+                <Link to={`/update/${post._id}`}>
+                  <Edit color="primary" />
+                </Link>
+                <Delete color="error" onClick={() => deleteBlog()} />
+              </>
+            )}
+          </Box>
 
-        <Heading>{post.title}</Heading>
-        <AutherBox>
-          <Typography>
-            Auther:{" "}
-            <Box component="span" style={{ fontWeight: 600 }}>
-              {post.name ? post.name : post.username}
-            </Box>
-          </Typography>
-          <Typography style={{ marginLeft: "auto" }}>
-            {new Date(post.createdDate).toDateString()}{" "}
-          </Typography>
-        </AutherBox>
-        <Description>{post.description} </Description>
+          <Heading>{post.title}</Heading>
+          <AutherBox>
+            <Typography>
+              Auther:{" "}
+              <Box component="span" style={{ fontWeight: 300 }}>
+                {post.name ? post.name : post.username}
+              </Box>
+            </Typography>
+            <Typography style={{ marginLeft: "auto" }}>
+              {new Date(post.createdDate).toDateString()}{" "}
+            </Typography>
+          </AutherBox>
+          <Description>{post.description} </Description>
+        </Box>
+        <Comments post={post} />
       </Grid>
+
+      
+
     </Grid>
   );
 };
