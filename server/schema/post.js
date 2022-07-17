@@ -4,7 +4,6 @@ const postSchema = mongoose.Schema({
   title: {
     type: String,
     required: true,
-    unique: true,
   },
   description: {
     type: String,
@@ -23,6 +22,10 @@ const postSchema = mongoose.Schema({
     required: true,
   },
   categories: {
+    type: String,
+    required: true,
+  },
+  googleId: {
     type: String,
     required: true,
   },

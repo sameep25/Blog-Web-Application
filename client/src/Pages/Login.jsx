@@ -15,7 +15,6 @@ const CustomBox = styled(Box)`
   width: 400px;
   min-height: 100vh;
 `;
-
 const WrapperBox = styled(Box)`
   display: flex;
   flex-direction: column;
@@ -24,7 +23,6 @@ const WrapperBox = styled(Box)`
     margin-top: 10px;
   }
 `;
-
 const LoginButton = styled(Button)`
   text-transform: none;
   background: #fb641b;
@@ -32,18 +30,15 @@ const LoginButton = styled(Button)`
   border-radius: 2px;
   margin-top: 10px;
 `;
-
 const SignupButton = styled(Button)`
   text-transform: none;
   border-radius: 2px;
 `;
-
 const Text = styled(Typography)`
   margin-top: 10px;
   color: #878787;
   font-size: 12px;
 `;
-
 const Image = styled("img")({
   width: 150,
   margin: "auto",

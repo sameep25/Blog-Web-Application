@@ -50,6 +50,7 @@ const initialPost = {
   username: "",
   name:"",
   categories: "",
+  googleId:"",
   createdDate: new Date(),
 };
 
@@ -88,6 +89,7 @@ const CreateBlog = () => {
     post.categories = location.search?.split("=")[1] || "";
     post.username = account.username;
     post.name = account.name ;
+    post.googleId = account.googleId ;
   }, [imageFile]);
 
   const savePost = async () => {

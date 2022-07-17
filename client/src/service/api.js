@@ -20,6 +20,15 @@ export const loginUserApi = async (userData) => {
   }
 };
 
+// google Login User
+export const googleLoginApi = async (userData) => {
+  try {
+    return await axios.post(`${URL}/google/login`, userData);
+  } catch (error) {
+    console.log("Error whiile calling googleLoginApi", error);
+  }
+};
+
 // upload image api
 export const uploadImageApi = async (imageData) => {
   try {
@@ -47,7 +56,6 @@ export const updatePostApi = async (postData) => {
     console.log("Error while calling savePostApi", error);
   }
 };
-
 
 // getPosts api
 export const getAllPosts = async (categories) => {

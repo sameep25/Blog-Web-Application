@@ -33,17 +33,20 @@ const initialComment = {
   name: "",
   postId: "",
   commentText: "",
+  picture:"",
+  googleId:"",
   date: new Date(),
 };
 
 const Comments = ({ post }) => {
-  const url = "https://static.thenounproject.com/png/12017-200.png";
 
   const { account } = useContext(DataContext);
   const [comment, setComment] = useState(initialComment);
   const [comments, setComments] = useState([]);
   const [toogle, setToogle] = useState(false);
   const { id } = useParams();
+
+  const url = account.picture ? account.picture : "https://static.thenounproject.com/png/12017-200.png";
 
   // fetching comments db
   useEffect(() => {
@@ -63,6 +66,8 @@ const Comments = ({ post }) => {
       name: account.name,
       postId: post._id,
       commentText: e.target.value,
+      picture:account.picture,
+      googleId:account.googleId,
     });
   };
 

@@ -47,12 +47,12 @@ const Description = styled(Typography)`
 const DetailView = () => {
   const [post, setPost] = useState({});
   const navigate = useNavigate();
+  const { account } = useContext(DataContext);
 
   const { id } = useParams();
   const url = post.picture
     ? post.picture
     : `https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80`;
-  const { account } = useContext(DataContext);
 
   // fetchiong Post or blog from db
   useEffect(() => {
@@ -84,7 +84,8 @@ const DetailView = () => {
         <Image src={url} alt="blog" />
         <Box style={{ padding: "10px", }}>
           <Box style={{ float: "right" }}>
-            {account.username === post.username && (
+            
+            {account.googleId === post.googleId && (
               <>
                 <Link to={`/update/${post._id}`}>
                   <Edit color="primary" />

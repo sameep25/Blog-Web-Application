@@ -5,6 +5,14 @@ const commentSchema = mongoose.Schema({
         type:String,
         required:true,
     },
+    googleId:{
+        type:String,
+        required:true,
+    },
+    picture:{
+        type:String,
+        required:true,
+    },
     postId:{
         type:String,
         required:true,

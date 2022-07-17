@@ -11,6 +11,11 @@ const Component = styled(Box)`
   background: #f9f9f9;
   padding: 10px;
 `;
+const Image = styled("img")({
+  width: "40px",
+  height: "40px",
+  borderRadius: "50%",
+});
 const Container = styled(Box)`
   display: flex;
   margin-bottom: 5px;
@@ -18,11 +23,13 @@ const Container = styled(Box)`
 const Name = styled(Typography)`
   font-size: 14px;
   margin-right: 20px;
+  margin-left: 10px;
+  margin-top:10px ;
 `;
 const StyledDate = styled(Typography)`
   color: #878787;
   font-size: 10px;
-  margin-top: 4px;
+  margin-top:14px ;
 `;
 const Delete = styled(DeleteIcon)`
   margin-left: auto;
@@ -33,6 +40,9 @@ const CommentText = styled(Typography)`
 `;
 
 const Comment = ({ comment, setToogle }) => {
+
+  const url = comment.picture ? comment.picture : "https://static.thenounproject.com/png/12017-200.png";
+
   const { account } = useContext(DataContext);
 
   const deleteComment = async () => {
@@ -47,9 +57,10 @@ const Comment = ({ comment, setToogle }) => {
   return (
     <Component>
       <Container>
+        <Image src={url} alt="dp" />
         <Name>{comment.name}</Name>
         <StyledDate>{new Date(comment.date).toDateString()}</StyledDate>
-        {comment.name === account.name && (
+        {comment.googleId === account.googleId && (
           <Delete color="error" onClick={() => deleteComment()} />
         )}
       </Container>

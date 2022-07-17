@@ -49,6 +49,7 @@ const initialPost = {
   picture: "",
   username: "",
   name:"",
+  googleId:"",
   categories: "",
   createdDate: new Date(),
 };
