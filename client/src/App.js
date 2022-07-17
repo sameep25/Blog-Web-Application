@@ -17,8 +17,7 @@ import CreateBlog from "./Pages/post/CreateBlog";
 import DetailView from "./Pages/post/DetailView";
 import UpdateBlog from "./Pages/post/UpdateBlog";
 import LoginGoogle from "./Pages/account/LoginGoogle";
-// COMPONENTS
-import Login from "./Pages/Login";
+// COMPONENT
 import Header from "./components/Home/Header";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
@@ -48,13 +47,6 @@ function App() {
               path="/google/login"
               element={
                 <LoginGoogle setIsUserAuthenticated={setIsUserAuthenticated} />
-              }
-            />
-
-            <Route
-              path="/login"
-              element={
-                <Login setIsUserAuthenticated={setIsUserAuthenticated} />
               }
             />
 
