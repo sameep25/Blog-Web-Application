@@ -47,7 +47,7 @@ const Post = ({ post }) => {
       <Text> {post.categories !== "null" ? post.categories : "All" } </Text>
       <Heading>{addElipsis(post.title, 20)} </Heading>
       <Text>Author : {post.username} </Text>
-      <Description> {addElipsis(post.description, 100)} </Description>
+      <Description> {addElipsis(post.description, 80)} </Description>
     </Container>
   );
 };

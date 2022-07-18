@@ -1,4 +1,4 @@
-import { React, useState, useContext ,useEffect } from "react";
+import { React, useState, useContext, useEffect } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
@@ -6,7 +6,7 @@ import jwt_decode from "jwt-decode";
 import { DataContext } from "../../context/DataProvider";
 import { googleLoginApi } from "../../service/api";
 
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 
 let initialUser = {
   name: "",
@@ -24,8 +24,7 @@ const LoginGoogle = ({ setIsUserAuthenticated }) => {
 
   useEffect(() => {
     saveReleventData();
-  }, [user])
-  
+  }, [user]);
 
   const onLoginSuccess = (res) => {
     console.log(jwt_decode(res.credential));
@@ -42,6 +41,7 @@ const LoginGoogle = ({ setIsUserAuthenticated }) => {
 
   const saveReleventData = async () => {
     console.log(user);
+    if (!user) return;
     let response = await googleLoginApi(user);
     if (response.status === 200) {
       console.log("success");
@@ -62,9 +62,14 @@ const LoginGoogle = ({ setIsUserAuthenticated }) => {
   };
 
   return (
-    <Box>
-      <GoogleLogin onSuccess={onLoginSuccess} onError={onLoginFailure} />
-    </Box>
+    <Button> Login With Google
+        <GoogleLogin
+          onSuccess={onLoginSuccess}
+          onError={onLoginFailure}
+          type={"icon"}
+          text={"signin_with"}
+        />
+    </Button>
   );
 };
 
