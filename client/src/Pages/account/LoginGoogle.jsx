@@ -1,4 +1,4 @@
-import { React, useState, useContext ,useEffect } from "react";
+import { React, useState, useContext, useEffect } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
@@ -6,7 +6,22 @@ import jwt_decode from "jwt-decode";
 import { DataContext } from "../../context/DataProvider";
 import { googleLoginApi } from "../../service/api";
 
-import { Box } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
+import { styled } from "@mui/material/styles";
+
+const CustomBox = styled(Box)`
+  margin: auto;
+  width: 400px;
+  margin-bottom : 50px ;
+`;
+
+const Image = styled("img")({
+  width: 150,
+  margin: "auto",
+  display: "flex",
+  padding: "50px 0 0 ",
+});
+// __________________________________________________
 
 let initialUser = {
   name: "",
@@ -24,8 +39,7 @@ const LoginGoogle = ({ setIsUserAuthenticated }) => {
 
   useEffect(() => {
     saveReleventData();
-  }, [user])
-  
+  }, [user]);
 
   const onLoginSuccess = (res) => {
     console.log(jwt_decode(res.credential));
@@ -61,10 +75,26 @@ const LoginGoogle = ({ setIsUserAuthenticated }) => {
     console.log("Login Failed");
   };
 
+  const imageURL =
+    "https://www.sesta.it/wp-content/uploads/2021/03/logo-blog-sesta-trasparente.png";
+
   return (
-    <Box>
-      <GoogleLogin onSuccess={onLoginSuccess} onError={onLoginFailure} />
-    </Box>
+    <>
+      <Grid container justifyContent={"center"}>
+        <Grid item xs={12} md={12} sm={12} lg={12}>
+          <CustomBox>
+            <Image src={imageURL} alt="Login" />
+          </CustomBox>
+        </Grid>
+        <Grid item xs={12} md={12} sm={12} lg={12} style={{display : "flex" ,justifyContent:"center"}} >
+          <GoogleLogin
+            size={"medium"}
+            onSuccess={onLoginSuccess}
+            onError={onLoginFailure}
+          />
+        </Grid>
+      </Grid>
+    </>
   );
 };
 
