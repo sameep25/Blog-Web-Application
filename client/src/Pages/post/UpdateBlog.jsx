@@ -104,6 +104,7 @@ const UpdateBlog = () => {
   }, [imageFile]);
 
   const updateBlogPost = async () => {
+    if(post.title === "" || post.description === "") return ;
     const response = await updatePostApi(post);
     if (response.status === 200) {
       navigate(`/details/${id}`);

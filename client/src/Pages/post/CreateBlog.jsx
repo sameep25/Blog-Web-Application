@@ -93,6 +93,7 @@ const CreateBlog = () => {
   }, [imageFile]);
 
   const savePost = async () => {
+    if(post.title === "" || post.description === "") return ;
     const response = await savePostApi(post);
     if (response.status === 200) {
       navigate("/");

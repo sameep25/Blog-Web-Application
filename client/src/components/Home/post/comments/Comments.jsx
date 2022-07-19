@@ -80,6 +80,7 @@ const Comments = ({ post }) => {
   // calling postCommentApi
   const addComment = async () => {
     // console.log(comment);
+    if(comment.commentText === "") return ;
     let response = await postCommentApi(comment);
     if (response.status === 200) {
       setInitialValue() ;
@@ -92,6 +93,7 @@ const Comments = ({ post }) => {
       <Container>
         <Image src={url} alt="dp" />
         <StyledTextArea
+          value={comment.commentText}
           minRows={1}
           placeholder="Add a comment..."
           onChange={(e) => handleChange(e)}
