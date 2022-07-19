@@ -28,6 +28,8 @@ const StyledTextArea = styled(TextareaAutosize)`
   border-bottom: 1px solid #f1f1f1;
   padding: 5px;
 `;
+// ____________________________________________________________________________________
+
 // inital comment object
 const initialComment = {
   name: "",
@@ -71,12 +73,16 @@ const Comments = ({ post }) => {
     });
   };
 
+  const setInitialValue = () =>{
+    setComment(initialComment);
+  }
+
   // calling postCommentApi
   const addComment = async () => {
     // console.log(comment);
     let response = await postCommentApi(comment);
     if (response.status === 200) {
-      setComment(initialComment);
+      setInitialValue() ;
     }
     setToogle((prevState) => !prevState);
   };
