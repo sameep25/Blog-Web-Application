@@ -4,7 +4,7 @@ import { useSearchParams, Link } from "react-router-dom";
 import { getAllPosts } from "../../../service/api";
 import Post from "./Post";
 
-import { Box, Grid ,styled} from "@mui/material";
+import { Box, Grid } from "@mui/material";
 
 
 const Posts = () => {

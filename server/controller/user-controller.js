@@ -4,7 +4,7 @@ import GoogleUser from "../schema/googleUser.js";
 
 dotenv.config();
 
-
+// login using google credentials
 export const googleLoginUser = async (req, res) => {
   try {
     let id = req.body.googleId;

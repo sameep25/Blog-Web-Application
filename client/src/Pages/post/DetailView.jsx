@@ -90,7 +90,7 @@ const DetailView = () => {
                 <Link to={`/update/${post._id}`}>
                   <Edit color="primary" />
                 </Link>
-                <Delete color="error" onClick={() => deleteBlog()} />
+                <Delete style={{cursor:"pointer"}} color="error" onClick={() => deleteBlog()} />
               </>
             )}
           </Box>
@@ -98,7 +98,7 @@ const DetailView = () => {
           <Heading>{post.title}</Heading>
           <AutherBox>
             <Typography>
-              Auther:{" "}
+              Author:{" "}
               <Box component="span" style={{ fontWeight: 300 }}>
                 {post.name ? post.name : post.username}
               </Box>

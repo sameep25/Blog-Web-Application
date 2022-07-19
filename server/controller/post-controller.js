@@ -1,5 +1,6 @@
 import Post from "../schema/post.js";
 
+// saving new post/blog
 export const createPost = async (req, res) => {
   try {
     const post = await new Post(req.body);
@@ -12,6 +13,7 @@ export const createPost = async (req, res) => {
   }
 };
 
+// fetch all posts with category
 export const getAllPosts = async (req, res) => {
   let category = req.query.category;
   let posts;
@@ -29,6 +31,7 @@ export const getAllPosts = async (req, res) => {
   }
 };
 
+// fetch post with id
 export const getPostById = async (req, res) => {
   try {
     let id = req.query.id;
@@ -41,6 +44,7 @@ export const getPostById = async (req, res) => {
   }
 };
 
+// update post using id
 export const updatePostById = async (req, res) => {
   try {
     let id = req.body._id;
@@ -58,6 +62,7 @@ export const updatePostById = async (req, res) => {
   }
 };
 
+// delete post using id
 export const deletePostById = async (req, res) => {
   try {
     let id = req.params.id;

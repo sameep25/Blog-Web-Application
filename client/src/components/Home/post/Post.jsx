@@ -45,7 +45,7 @@ const Post = ({ post }) => {
     <Container>
       <Image src={url} alt="blog" />
       <Text> {post.categories !== "null" ? post.categories : "All" } </Text>
-      <Heading>{addElipsis(post.title, 20)} </Heading>
+      <Heading>{addElipsis(post.title, 15)} </Heading>
       <Text>Author : {post.username} </Text>
       <Description> {addElipsis(post.description, 80)} </Description>
     </Container>
