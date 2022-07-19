@@ -14,7 +14,7 @@ const Container = styled(Box)`
   flex-direction: column;
   align-items: center;
   & > p {
-    padding: 0 5px 5px 5px;
+    padding: 0 5px 0px 5px;
   }
 `;
 const Image = styled("img")({
@@ -47,7 +47,7 @@ const Post = ({ post }) => {
       <Text> {post.categories !== "null" ? post.categories : "All" } </Text>
       <Heading>{addElipsis(post.title, 15)} </Heading>
       <Text>Author : {post.username} </Text>
-      <Description> {addElipsis(post.description, 90)} </Description>
+      <Description> {addElipsis(post.description, 100)} </Description>
     </Container>
   );
 };
