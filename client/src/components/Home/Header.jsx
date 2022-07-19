@@ -1,13 +1,22 @@
-import React from "react";
+import { React, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Link } from "react-router-dom";
-import { AppBar, Toolbar, Typography } from "@mui/material";
+import { AppBar, Button, Toolbar } from "@mui/material";
 import { styled } from "@mui/material/styles";
+
+import { DataContext } from "../../context/DataProvider";
 
 // MUI
 const StyledAppbar = styled(AppBar)`
   background: #fff;
   color: #000;
+`;
+
+const StyledButton = styled(Button)`
+  color: inherit;
+  font: inherit;
+  text-transform: initial;
 `;
 
 const StyledToolbar = styled(Toolbar)`
@@ -19,7 +28,23 @@ const StyledToolbar = styled(Toolbar)`
   }
 `;
 
+let initialUser = {
+  name: "",
+  username: "",
+  googleId: "",
+  picture: "",
+  email: "",
+};
+
 const Header = () => {
+  const { setAccount } = useContext(DataContext);
+  const navigate = useNavigate();
+
+  const logout = () => {
+    setAccount(initialUser);
+    navigate("/google/login");
+  };
+
   return (
     <>
       <StyledAppbar position="sticky">
@@ -27,7 +52,7 @@ const Header = () => {
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>
           <Link to="/contact">Contact</Link>
-          <Link to="/login">Logout</Link>
+          <StyledButton onClick={() => logout()}>Logout</StyledButton>
         </StyledToolbar>
       </StyledAppbar>
     </>

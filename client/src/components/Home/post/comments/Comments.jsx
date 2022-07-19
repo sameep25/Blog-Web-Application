@@ -99,7 +99,7 @@ const Comments = ({ post }) => {
         </Button>
       </Container>
 
-      <Box>
+      <Box style={{marginBottom:"10px"}}>
         {comments &&
           comments.length > 0 &&
           comments.map((comment) => (
