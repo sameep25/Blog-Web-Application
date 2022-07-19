@@ -1,5 +1,5 @@
 import { React, useState, useContext, useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { DataContext } from "../../../../context/DataProvider";
 
 import { postCommentApi, getCommentsApi } from "../../../../service/api";
