@@ -7,7 +7,6 @@ import {
   Outlet,
 } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { client_id } from "./Keys";
 
 import DataProvider from "./context/DataProvider";
 
@@ -22,6 +21,7 @@ import Header from "./components/Home/Header";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 
+const clientID = process.env.REACT_APP_CLIENT_ID ;
 // private routes to prevent direct routing
 const PrivateRoute = ({ isUserAuthenticated, ...props }) => {
   return isUserAuthenticated ? (
@@ -38,7 +38,7 @@ function App() {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
 
   return (
-    <GoogleOAuthProvider clientId={client_id}>
+    <GoogleOAuthProvider clientId={clientID}>
       <DataProvider>
         <Router>
           <Routes>
