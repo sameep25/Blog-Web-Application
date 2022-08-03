@@ -42,7 +42,7 @@ const LoginGoogle = ({ setIsUserAuthenticated }) => {
   }, [user]);
 
   const onLoginSuccess = (res) => {
-    console.log(jwt_decode(res.credential));
+    // console.log(jwt_decode(res.credential));
     let userData = jwt_decode(res.credential);
     setUser({
       ...user,
@@ -55,7 +55,7 @@ const LoginGoogle = ({ setIsUserAuthenticated }) => {
   };
 
   const saveReleventData = async () => {
-    console.log(user);
+    // console.log(user);
     let response = await googleLoginApi(user);
     if (response.status === 200) {
       console.log("success");

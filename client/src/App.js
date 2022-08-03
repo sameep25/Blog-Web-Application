@@ -23,7 +23,7 @@ import Contact from "./Pages/Contact";
 
 const clientID = process.env.REACT_APP_CLIENT_ID ;
 // private routes to prevent direct routing
-const PrivateRoute = ({ isUserAuthenticated, ...props }) => {
+const PrivateRoute = ({ isUserAuthenticated }) => {
   return isUserAuthenticated ? (
     <>
       <Header />
