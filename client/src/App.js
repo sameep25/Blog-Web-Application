@@ -21,7 +21,6 @@ import Header from "./components/Home/Header";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 
-const clientID = process.env.REACT_APP_CLIENT_ID ;
 // private routes to prevent direct routing
 const PrivateRoute = ({ isUserAuthenticated }) => {
   return isUserAuthenticated ? (
@@ -38,7 +37,7 @@ function App() {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
 
   return (
-    <GoogleOAuthProvider clientId={clientID}>
+    <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID} >
       <DataProvider>
         <Router>
           <Routes>

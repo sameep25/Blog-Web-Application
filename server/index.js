@@ -9,16 +9,15 @@ import Router from "./routes/Routes.js";
 
 const app = express();
 dotenv.config();
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use("/", Router);
 
-const username = process.env.DB_USERNAME;
-const password = process.env.DB_PASSWORD;
-Connection(username, password);
+const URL = process.env.MONGO_URI ;
+Connection(URL);
 
 app.listen(PORT, () => {
   console.log(`server is runnig successfully on port ${PORT}`);
